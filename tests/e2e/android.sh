@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# The packaged lifecycle must reject incomplete consumer configuration before booting.
+if env -u MOBILE_WORKSPACE mobile-develop > /tmp/missing-workspace.log 2>&1; then
+  echo 'mobile-develop accepted a missing MOBILE_WORKSPACE' >&2
+  exit 1
+fi
+if [[ "$(cat /tmp/missing-workspace.log)" != *'Set MOBILE_WORKSPACE'* ]]; then
+  cat /tmp/missing-workspace.log >&2
+  exit 1
+fi
+
 mkdir -p "$HOME" "$ANDROID_AVD_HOME" /tmp/native-test/classes /tmp/native-test/dex
 cd /tmp/native-test
 emulator_pid=''
