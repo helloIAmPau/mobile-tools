@@ -32,7 +32,8 @@ ENV HOME=/state/home \
     MAESTRO_CLI_NO_ANALYTICS=1 \
     MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED=true
 WORKDIR /source
-CMD ["bash"]
+COPY --chmod=755 develop.sh /usr/local/bin/mobile-develop
+CMD ["mobile-develop"]
 
 FROM tooling AS test
 COPY tests/ /tests/
