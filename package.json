@@ -1,0 +1,9 @@
+{
+  "name": "mobile-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "docker build --target runtime --tag mobile-tools:local .",
+    "test": "docker build --target test --tag mobile-tools:e2e . && docker run --rm --init --device /dev/kvm mobile-tools:e2e"
+  }
+}

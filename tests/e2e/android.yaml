@@ -1,0 +1,8 @@
+appId: io.helloiampau.mobiletools.smoke
+---
+- launchApp:
+    clearState: true
+- assertVisible: Mobile tools ready
+- stopApp
+- launchApp
+- assertVisible: Mobile tools ready
